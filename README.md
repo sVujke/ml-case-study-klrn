@@ -21,35 +21,48 @@ A brief overview of the model and solution can be found in this [doc](https://do
 
 1. Create ECR repository on AWS
 
-> aws ecr create-repository --repository-name klarna-solution
+ ```{r, engine='bash', count_lines}
+ aws ecr create-repository --repository-name klarna-solution
+ ```
 
 2. Set environment variable that points to the ECR registry
 
-> export DOCKER_REGISTRY=xyz.dkr.ecr.eu-central-1.amazonaws.com
+ ```{r, engine='bash', count_lines}
+ export DOCKER_REGISTRY=xyz.dkr.ecr.eu-central-1.amazonaws.com
+ ```
 
 3. Push dockerized project to ECR
-> $(aws ecr get-login --no-include-email --region eu-central-1)
+ 
+```{r, engine='bash', count_lines}
+$(aws ecr get-login --no-include-email --region eu-central-1)
 
-> docker-compose build
-
-> docker-compose push
+docker-compose build
+docker-compose push
+```
 
 4. Set-up the AWS infrastructure with Terraform
-> terraform init
-> terraform apply
+ ```{r, engine='bash', count_lines}
+terraform init
+terraform apply
+```
 
 5. Deploy the project on the infrastructure
 
 First, export a variable to which the script will ssh 
 
-> export EC2_MACHINE=xxx.yyy.zzz.qqq
-
+```{r, engine='bash', count_lines}
+export EC2_MACHINE=xxx.yyy.zzz.qqq
+```
 Then run the deploy script
 
-> bash deploy.sh
+ ```{r, engine='bash', count_lines}
+bash deploy.sh
+```
 
 # Querying the endpoint
 
 To query the endpoint with a randomly selected feature set, simply run:
 
-> python experiments/send_request_for_random_user.py
+```{r, engine='bash', count_lines}
+python experiments/send_request_for_random_user.py
+```
