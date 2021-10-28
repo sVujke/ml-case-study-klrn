@@ -1,0 +1,4 @@
+.terraform*
+data/*
+terrafrom*
+src/__pycache__

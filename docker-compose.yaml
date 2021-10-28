@@ -1,0 +1,34 @@
+version: "3.4"
+
+services:
+  klarna-service:
+    build: .
+    image: ${DOCKER_REGISTRY}
+
+  train-model:
+    image: ${DOCKER_REGISTRY}
+    depends_on:
+      - klarna-service
+    command: python src/train.py
+    volumes:
+      - .:/home/klarna-solution
+
+  klarna-api-production:
+    image: ${DOCKER_REGISTRY}
+    depends_on:
+      - klarna-service
+    command: python src/server.py
+    environment:
+      - RUN_PROD=1
+    ports:
+      - "80:80"
+
+  klarna-api:
+    image: ${DOCKER_REGISTRY}
+    depends_on:
+      - klarna-service
+    command: python src/server.py
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/home/klarna-solution
