@@ -11,8 +11,8 @@ if __name__ == "__main__":
 
     print('Selected uuid:', param_dict['uuid'])
 
+    # ec2 machine ip
     ip_address = '3.70.181.154' 
-    ip_address = '10.8.1.6:5000'
 
     headers = {} 
     headers["Content-Type"] = "application/json"
